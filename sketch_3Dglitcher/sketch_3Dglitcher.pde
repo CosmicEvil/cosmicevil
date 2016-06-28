@@ -45,4 +45,5 @@ for (int i=0; i < lines.length; ++i) {
   
  output.flush(); // Writes the remaining data to the file
  output.close(); // Finishes the file
+ exit();
 }
