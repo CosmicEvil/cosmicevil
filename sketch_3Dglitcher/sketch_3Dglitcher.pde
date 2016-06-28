@@ -31,7 +31,7 @@ for (int i=0; i < lines.length; ++i) {
        
       if (j != (int)j) continue; // j is not an int
        
-       j = j + random(5);
+       j = j + random(-5,5);
        
        help[k] = str(j);
        
