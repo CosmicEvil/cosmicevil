@@ -2,6 +2,7 @@
 //
 //INSTRUCTIONS:
 //1) CHANGE THE FILE STRING TO THE NAME OF THE FILE YOU WANT TO GLITCH
+//1b)change the dist value to how much fuckup you'd like.
 //2) PRESS PLAY
 //3)??????
 //4) LOAD IT IN BLENDER/C4D/MAYA/ETC
@@ -11,8 +12,8 @@
 //TEXTEDIT, AND THEN JUST PASTE IT BACK AFTER RUNNING THE SCRIPT
 
 PrintWriter output;
-String file = "dungeon";
-
+String file = "test";
+int dist = 1000;
 void setup() {
 output = createWriter(file + int(random(666)) +".obj"); 
 
@@ -22,6 +23,7 @@ exp = lines;
 
 for (int i=0; i < lines.length; ++i) {
   String[] help = split(lines[i]," ");
+  if(!help[0].equals("#")){
   int lineSize = help.length; // cache the value for perf
    for(int k=1; k < lineSize; ++k){ // changed i to k 
        
@@ -31,7 +33,7 @@ for (int i=0; i < lines.length; ++i) {
        
       if (j != (int)j) continue; // j is not an int
        
-       j = j + random(-5,5);
+       j = j + random(-dist,dist);
        
        help[k] = str(j);
        
@@ -42,6 +44,7 @@ for (int i=0; i < lines.length; ++i) {
     println(lines[i]);
     output.println(exp[i]); //write line of .obj
   }
+}
   
  output.flush(); // Writes the remaining data to the file
  output.close(); // Finishes the file
