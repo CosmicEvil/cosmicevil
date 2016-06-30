@@ -12,8 +12,8 @@
 //TEXTEDIT, AND THEN JUST PASTE IT BACK AFTER RUNNING THE SCRIPT
 
 PrintWriter output;
-String file = "test";
-int dist = 1000;
+String file = "guy";
+int dist = 1;
 void setup() {
 output = createWriter(file + int(random(666)) +".obj"); 
 
@@ -23,20 +23,29 @@ exp = lines;
 
 for (int i=0; i < lines.length; ++i) {
   String[] help = split(lines[i]," ");
-  if(!help[0].equals("#")){
+  if(!help[0].equals("#")||!(help[0].equals("m")&&help[1].equals("t")&&help[2].equals("l"))){
   int lineSize = help.length; // cache the value for perf
    for(int k=1; k < lineSize; ++k){ // changed i to k 
-       
-      String n = help[k];
+   
+      String[] help2 = split(help[k],"/");
+      int lineSize2 = help2.length; // cache the value for perf
 
-      float j = parseFloat(help[k]);
+      String n = help[k];
+      for(int l=0; l < lineSize2; ++l){ //subroutine for facets
+
+      float j = parseFloat(help2[l]);
        
       if (j != (int)j) continue; // j is not an int
        
        j = j + random(-dist,dist);
        
-       help[k] = str(j);
+       help2[l] = str(j);
        
+      }
+            
+      
+      help[k]= join(help2,"/");
+ 
     }
     exp[i]= join(help," ");
     
