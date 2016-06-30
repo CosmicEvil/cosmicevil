@@ -12,50 +12,48 @@
 //TEXTEDIT, AND THEN JUST PASTE IT BACK AFTER RUNNING THE SCRIPT
 
 PrintWriter output;
-String file = "guy";
+String file = "guy2";
 int dist = 1;
 void setup() {
-output = createWriter(file + int(random(666)) +".obj"); 
+  output = createWriter(file + int(random(666)) +".obj"); 
 
-String[] lines = loadStrings(file + ".obj");
-String[] exp = new String[lines.length];
-exp = lines;
+  String[] lines = loadStrings(file + ".obj");
+  String[] exp = new String[lines.length];
+  exp = lines;
 
-for (int i=0; i < lines.length; ++i) {
-  String[] help = split(lines[i]," ");
-  if(!help[0].equals("#")||!(help[0].equals("m")&&help[1].equals("t")&&help[2].equals("l"))){
-  int lineSize = help.length; // cache the value for perf
-   for(int k=1; k < lineSize; ++k){ // changed i to k 
-   
-      String[] help2 = split(help[k],"/");
-      int lineSize2 = help2.length; // cache the value for perf
+  for (int i=0; i < lines.length; ++i) {
+    String[] help = split(lines[i], " ");
+    if (!help[0].equals("#")||!(help[0].equals("m")&&help[1].equals("t")&&help[2].equals("l"))) {
+      int lineSize = help.length; // cache the value for perf
+      for (int k=1; k < lineSize; ++k) { // changed i to k 
 
-      String n = help[k];
-      for(int l=0; l < lineSize2; ++l){ //subroutine for facets
+        String[] help2 = split(help[k], "/");
+        int lineSize2 = help2.length; // cache the value for perf
 
-      float j = parseFloat(help2[l]);
-       
-      if (j != (int)j) continue; // j is not an int
-       
-       j = j + random(-dist,dist);
-       
-       help2[l] = str(j);
-       
+        String n = help[k];
+        for (int l=0; l < lineSize2; ++l) { //subroutine for facets
+
+          float j = parseFloat(help2[l]);
+
+          if (j != (int)j) continue; // j is not an int
+
+          j = j + random(-dist, dist);
+
+          help2[l] = str(j);
+        }
+
+
+        help[k]= join(help2, "/");
       }
-            
-      
-      help[k]= join(help2,"/");
- 
+      exp[i]= join(help, " ");
+
+      //join back the **** to one line
+      println(lines[i]);
+      output.println(exp[i]); //write line of .obj
     }
-    exp[i]= join(help," ");
-    
-    //join back the **** to one line
-    println(lines[i]);
-    output.println(exp[i]); //write line of .obj
   }
-}
-  
- output.flush(); // Writes the remaining data to the file
- output.close(); // Finishes the file
- exit();
+
+  output.flush(); // Writes the remaining data to the file
+  output.close(); // Finishes the file
+  exit();
 }
